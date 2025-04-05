@@ -1,0 +1,19 @@
+body {
+    border: 1px solid;
+}
+
+#infinite-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    height: 700px;
+    overflow: scroll;
+    padding: 0;
+    list-style: none;
+}
+
+/* 관찰할 sentinel */
+#sentinel {
+    height: 10px;
+    background: red;
+}
