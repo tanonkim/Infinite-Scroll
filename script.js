@@ -13,6 +13,7 @@ const loadMore = function () {
 
 // ul리스트가 바닥까지 스크롤했는지 확인
 listElement.addEventListener('scroll', function () {
+    // 👇 여기서 scrollTop, clientHeight, scrollHeight 등은 모두 리플로우 유발 요소
     if (listElement.scrollTop + listElement.clientHeight >= listElement.scrollHeight) {
         console.log('this');
         loadMore();
