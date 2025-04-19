@@ -67,33 +67,46 @@ export default class ImageGrid {
   }
 
   loadNextBatch(): void {
+    const nextSource = this.handleImageLoad();
+
+    if (nextSource?.value) {
+      this.renderImages(nextSource.value);
+      this.createObserverInLastImage();
+    }
+  }
+
+  private handleImageLoad() {
     const next = this.imageGenerator?.next();
+
     if (next?.done) {
       console.log('All images loaded');
       return;
     }
 
-    if (next?.value) {
-      console.log('Loading next batch:', next.value);
-      next.value.forEach((src: string) => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = `avatar-${src.split('img=')[1]}`;
-        img.className = 'avatar';
-        img.loading = 'lazy';
+    return next;
+  }
 
-        img.onerror = () => {
-          console.error(`Image Loading Fail : ${src}`);
-          img.src = 'https://picsum.photos/200'; // 대체 이미지
-        };
+  private renderImages(sourceArray: string[]) {
+    console.log('Loading next batch:', sourceArray);
+    sourceArray.forEach((src: string) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `avatar-${src.split('img=')[1]}`;
+      img.className = 'avatar';
+      img.loading = 'lazy';
 
-        this.container.appendChild(img);
-      });
+      img.onerror = () => {
+        console.error(`Image Loading Fail : ${src}`);
+        img.src = 'https://picsum.photos/200'; // 대체 이미지
+      };
 
-      const lastImg = this.container.lastElementChild;
-      if (lastImg) {
-        this.observer.observe(lastImg);
-      }
+      this.container.appendChild(img);
+    });
+  }
+  private createObserverInLastImage() {
+    const lastImg = this.container.lastElementChild;
+    if (lastImg) {
+      this.observer.observe(lastImg);
     }
   }
 }
