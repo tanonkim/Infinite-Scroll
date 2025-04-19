@@ -1,6 +1,11 @@
-import data from './data.js';
+import data from "./data";
 
 export default class ImageGrid {
+    batchSize: number;
+    imageGenerator: Generator<any, void, unknown>;
+    container: HTMLDivElement;
+    observer: IntersectionObserver;
+
     constructor({ batchSize = 4 }) {
         this.batchSize = batchSize;
         this.imageGenerator = this.createImageGenerator(data.backgrounds.images);
@@ -9,7 +14,7 @@ export default class ImageGrid {
         this.loadNextBatch(); // 초기 이미지 로딩
     }
 
-    *createImageGenerator(images) {
+    *createImageGenerator(images : string[]) {
         for (let index = 0; index < images.length; index += this.batchSize) {
             yield images.slice(index, index + this.batchSize);
         }
@@ -41,7 +46,7 @@ export default class ImageGrid {
         const next = this.imageGenerator.next();
         if (next.done) return;
 
-        next.value.forEach((src) => {
+        next.value.forEach((src : string) => {
             const img = document.createElement('img');
             img.src = src;
             img.className = 'avatar';
