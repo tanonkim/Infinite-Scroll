@@ -4,7 +4,8 @@
   "description": "Infinite Scroll implemented with Generator and IntersectionObserver",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc --watch & live-server",
+    "dev": "vite",
+    "build": "tsc && vite build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,8 +20,16 @@
   },
   "homepage": "https://github.com/tanonkim/Infinite-Scroll#readme",
   "devDependencies": {
+    "live-server": "git+https://github.com/tapio/live-server.git#ad22544",
     "typescript": "^5.4.0",
-    "live-server": "git+https://github.com/tapio/live-server.git#ad22544"
+    "vite": "^6.3.2"
+  },
+  "dependencies": {
+    "msw": "^2.7.5"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
-
 }
