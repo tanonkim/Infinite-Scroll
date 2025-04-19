@@ -1,4 +1,4 @@
-import data from './data.js';
+import data from "./data";
 export default class ImageGrid {
     constructor({ batchSize = 4 }) {
         this.batchSize = batchSize;
