@@ -78,7 +78,15 @@ export default class ImageGrid {
       next.value.forEach((src: string) => {
         const img = document.createElement('img');
         img.src = src;
+        img.alt = `avatar-${src.split('img=')[1]}`;
         img.className = 'avatar';
+        img.loading = 'lazy';
+
+        img.onerror = () => {
+          console.error(`Image Loading Fail : ${src}`);
+          img.src = 'https://picsum.photos/200'; // 대체 이미지
+        };
+
         this.container.appendChild(img);
       });
 

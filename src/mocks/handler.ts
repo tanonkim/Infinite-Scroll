@@ -5,7 +5,7 @@ export const handlers = [
     return HttpResponse.json({
       backgrounds: {
         images: [
-          'https://i.pravatar.cc/150?img=1',
+          'https://i.p111ravatar.cc/150?img1=1',
           'https://i.pravatar.cc/150?img=2',
           'https://i.pravatar.cc/150?img=3',
           'https://i.pravatar.cc/150?img=4',
