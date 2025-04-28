@@ -1,0 +1,29 @@
+{
+  "name": "infinite-scroll",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^12.1.2",
+    "rollup": "^4.40.1",
+    "tslib": "^2.8.1",
+    "typescript": "^5.8.3"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "prepublishOnly": "yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tanonkim/Infinite-Scroll.git"
+  },
+  "author": "TanonKim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tanonkim/Infinite-Scroll/issues"
+  },
+  "homepage": "https://github.com/tanonkim/Infinite-Scroll#readme"
+}
