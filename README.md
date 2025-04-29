@@ -18,13 +18,13 @@
 ## Install
 
 ```bash
-npm install inview-observer
+npm install @tanonkim/infinite-scroll
 # or
-yarn add inview-observer
+yarn add @tanonkim/infinite-scroll
 ```
 
-
 ## Usage
+
 ```typescript
 import { createInViewGenerator } from 'inview-observer';
 

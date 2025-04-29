@@ -1,10 +1,16 @@
 {
-  "name": "infinite-scroll",
-  "version": "1.0.0",
+  "name": "@tanonkim/infinite-scroll",
+  "version": "1.0.2",
   "description": "",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/inview-observer.cjs.js",
+  "module": "dist/inview-observer.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
   "dependencies": {},
   "devDependencies": {
     "@rollup/plugin-typescript": "^12.1.2",
@@ -20,7 +26,7 @@
     "type": "git",
     "url": "git+https://github.com/tanonkim/Infinite-Scroll.git"
   },
-  "author": "TanonKim",
+  "author": "tanonkim",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tanonkim/Infinite-Scroll/issues"

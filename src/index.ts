@@ -14,7 +14,6 @@ export interface ObserverOptions {
 
 export function createInViewGenerator(options: ObserverOptions = {}) {
   let resolve: (value: InViewEntry) => void;
-  let pending = false;
   let lastTrigger = 0;
   const observedElements = new Set<Element>();
   let debounceTimeout: ReturnType<typeof setTimeout> | null = null;
