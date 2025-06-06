@@ -19,7 +19,7 @@
     "typescript": "^5.8.3"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c --bundleConfigAsCjs",
     "prepublishOnly": "yarn build"
   },
   "repository": {
