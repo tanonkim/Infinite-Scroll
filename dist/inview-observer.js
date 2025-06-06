@@ -38,7 +38,7 @@ typeof SuppressedError === "function" ? SuppressedError : function (error, suppr
 };
 
 function createInViewGenerator(options = {}) {
-    let resolve;
+    let resolveNextEntry;
     let lastTrigger = 0;
     const observedElements = new Set();
     let debounceTimeout = null;
@@ -46,7 +46,7 @@ function createInViewGenerator(options = {}) {
         return __asyncGenerator(this, arguments, function* () {
             while (true) {
                 const result = yield __await(new Promise((res) => {
-                    resolve = res;
+                    resolveNextEntry = res;
                 }));
                 yield yield __await(result);
             }
@@ -69,11 +69,11 @@ function createInViewGenerator(options = {}) {
                 if (debounceTimeout)
                     clearTimeout(debounceTimeout);
                 debounceTimeout = setTimeout(() => {
-                    resolve === null || resolve === void 0 ? void 0 : resolve({ entry, inView });
+                    resolveNextEntry === null || resolveNextEntry === void 0 ? void 0 : resolveNextEntry({ entry, inView });
                 }, options.debounceMs);
             }
             else {
-                resolve === null || resolve === void 0 ? void 0 : resolve({ entry, inView });
+                resolveNextEntry === null || resolveNextEntry === void 0 ? void 0 : resolveNextEntry({ entry, inView });
             }
         });
     }, {

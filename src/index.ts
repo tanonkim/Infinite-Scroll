@@ -13,7 +13,7 @@ export interface ObserverOptions {
 }
 
 export function createInViewGenerator(options: ObserverOptions = {}) {
-  let resolve: ((value: InViewEntry) => void) | undefined;
+  let resolveNextEntry: ((value: InViewEntry) => void) | undefined;
   let lastTrigger = 0;
   const observedElements = new Set<Element>();
   let debounceTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -21,7 +21,7 @@ export function createInViewGenerator(options: ObserverOptions = {}) {
   const generator = (async function* () {
     while (true) {
       const result = await new Promise((res) => {
-        resolve = res;
+        resolveNextEntry = res;
       });
       yield result;
     }
@@ -47,10 +47,10 @@ export function createInViewGenerator(options: ObserverOptions = {}) {
         if (options.debounceMs) {
           if (debounceTimeout) clearTimeout(debounceTimeout);
           debounceTimeout = setTimeout(() => {
-            resolve?.({ entry, inView });
+            resolveNextEntry?.({ entry, inView });
           }, options.debounceMs);
         } else {
-          resolve?.({ entry, inView });
+          resolveNextEntry?.({ entry, inView });
         }
       });
     },
