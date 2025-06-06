@@ -84,16 +84,12 @@ function createInViewGenerator(options = {}) {
         threshold: options.threshold,
     });
     function observe(element) {
-        if (!observedElements.has(element)) {
-            observer.observe(element);
-            observedElements.add(element);
-        }
+        observer.observe(element);
+        observedElements.add(element);
     }
     function unobserve(element) {
-        if (!observedElements.has(element)) {
-            observer.unobserve(element);
-            observedElements.delete(element);
-        }
+        observer.unobserve(element);
+        observedElements.delete(element);
     }
     function disconnect() {
         observer.disconnect();

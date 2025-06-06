@@ -62,17 +62,13 @@ export function createInViewGenerator(options: ObserverOptions = {}) {
   );
 
   function observe(element: HTMLElement) {
-    if (!observedElements.has(element)) {
-      observer.observe(element);
-      observedElements.add(element);
-    }
+    observer.observe(element);
+    observedElements.add(element);
   }
 
   function unobserve(element: Element) {
-    if (!observedElements.has(element)) {
-      observer.unobserve(element);
-      observedElements.delete(element);
-    }
+    observer.unobserve(element);
+    observedElements.delete(element);
   }
 
   function disconnect() {
