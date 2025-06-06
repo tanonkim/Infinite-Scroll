@@ -1,0 +1,70 @@
+<!-- Start serve . with  -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InView Observer Example</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      .observe-me {
+        height: 300px;
+        margin: 20px 0;
+        background: lightgray;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Scroll down to observe</h1>
+
+    <div id="list"></div>
+
+    <script type="module">
+      import { createInViewGenerator } from '../dist/inview-observer.js';
+
+      const { observe, generator } = createInViewGenerator({
+        rootMargin: '100px',
+        throttleMs: 300,
+      });
+
+      const list = document.getElementById('list');
+
+      let loadedCount = 0;
+      const batchSize = 20;
+
+      function addItems() {
+        for (let i = loadedCount; i < loadedCount + batchSize; i++) {
+          const div = document.createElement('div');
+          div.className = 'observe-me';
+          div.textContent = `Element #${i + 1}`;
+          list.appendChild(div);
+        }
+        loadedCount += batchSize;
+
+        // 새로 추가된 마지막 요소를 observe
+        const lastElement = list.lastElementChild;
+        if (lastElement) {
+          observe(lastElement);
+        }
+      }
+
+      // 최초 20개 추가
+      addItems();
+
+      (async () => {
+        for await (const { inView, entry } of generator) {
+          if (inView) {
+            entry.target.style.background = 'lightblue';
+            addItems();
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
